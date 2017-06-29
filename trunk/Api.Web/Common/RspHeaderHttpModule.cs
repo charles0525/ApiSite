@@ -24,7 +24,10 @@ namespace Api.Web.Common
         /// <param name="e"></param>
         void OnPreSendRspHeaders(object sender, EventArgs e)
         {
-            HttpContext.Current.Response.Headers.Remove("Server");
+            if (HttpContext.Current != null)
+            {
+                HttpContext.Current.Response.Headers.Remove("Server");
+            }
         }
     }
 }

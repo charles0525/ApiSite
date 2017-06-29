@@ -19,9 +19,10 @@ namespace Api.Web.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            ViewBag.CacheData = CacheHelper.Get<string>(ConstValues.CacheKey_HistoryLottery);
-            var siteInfo = _bll.Get();
-            return View(siteInfo);
+            //ViewBag.CacheData = CacheHelper.Get<string>(ConstValues.CacheKey_HistoryLottery);
+            //var siteInfo = _bll.Get();
+            //return View(siteInfo);
+            return View();
         }
 
         /// <summary>

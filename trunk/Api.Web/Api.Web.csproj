@@ -138,10 +138,12 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Demo\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Demo\DemoAreaRegistration.cs" />
+    <Compile Include="Common\BaseApiController.cs" />
     <Compile Include="Common\BaseController.cs" />
     <Compile Include="Common\ConstValues.cs" />
-    <Compile Include="Common\DataExtend.cs" />
-    <Compile Include="Common\JsonHelper.cs" />
+    <Compile Include="Common\ObjectExtends.cs" />
     <Compile Include="Common\HistoryLotteryHelper.cs" />
     <Compile Include="Common\PageExceptionAttribute.cs" />
     <Compile Include="Common\RspHeaderHttpModule.cs" />
@@ -166,6 +168,7 @@
     <Content Include="Views\Home\ChildPage.cshtml" />
     <Content Include="Views\Home\Query.cshtml" />
     <Content Include="Nlog.config" />
+    <Content Include="Areas\Demo\Views\web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -175,6 +178,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Demo\Models\" />
+    <Folder Include="Areas\Demo\Views\Shared\" />
     <Folder Include="Views\Ajax\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>

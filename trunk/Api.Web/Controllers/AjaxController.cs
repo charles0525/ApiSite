@@ -20,14 +20,14 @@ namespace Api.Web.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Where(x => x.Value.Errors.Count > 0).Select(x => new { PropertyName = x.Key, ErrorMsg = x.Value.Errors[0].ErrorMessage }).ToList();
-                return JsonHelper.ToObject(Entity.Enum.EnumRspStatus.Fail, value: errors).ToJsonResult();
+                return ObjectExtends.ToJsonObject(Entity.Enum.EnumRspStatus.Fail, values: errors).ToJsonResult();
             }
             if (!CheckSign(req))
             {
-                return JsonHelper.ToObject(Entity.Enum.EnumRspStatus.Fail, errorMsg: "签名验证失败!").ToJsonResult();
+                return ObjectExtends.ToJsonObject(Entity.Enum.EnumRspStatus.Fail, msg: "签名验证失败!").ToJsonResult();
             }
 
-            return JsonHelper.ToObject(Entity.Enum.EnumRspStatus.Success, value: new { name = "测试", age = 10 }).ToJsonResult();
+            return ObjectExtends.ToJsonObject(Entity.Enum.EnumRspStatus.Success, values: new { name = "测试", age = 10 }).ToJsonResult();
         }
 
         [ActionName("QueryInfo")]
@@ -38,14 +38,14 @@ namespace Api.Web.Controllers
             {
                 //理论出现概率
                 //CreateQueue();
-                probability = string.Format("{0:0.#####}", 1 * 100*0.00001 / (11 * 10 * 9 * 8 * 7*0.00001));
+                probability = string.Format("{0:0.#####}", 1 * 100 * 0.00001 / (11 * 10 * 9 * 8 * 7 * 0.00001));
 
                 //历史开奖中的中奖次数
                 historyWinningCount = GetHistoryWinningCount(req.LotteryCode).ToString();
 
                 //历史最大遗漏  待实现
             }
-            return JsonHelper.ToObject(Entity.Enum.EnumRspStatus.Success, value: new { probability, historyWinningCount, historyMaxFlawed }).ToJsonResult();
+            return ObjectExtends.ToJsonObject(Entity.Enum.EnumRspStatus.Success, values: new { probability, historyWinningCount, historyMaxFlawed }).ToJsonResult();
         }
 
         /// <summary>
