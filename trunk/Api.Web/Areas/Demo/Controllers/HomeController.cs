@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Api.Web.Common;
 using Api.Common;
+using Api.Web.Models;
 
 namespace Api.Web.Areas.Demo.Controllers
 {
@@ -84,24 +85,22 @@ namespace Api.Web.Areas.Demo.Controllers
         /// <returns></returns>
         public HttpResponseMessage GetUserBySecretKey(string token, long ticks, string appKey, string sign)
         {
-            //判断是否过期,30s有效期
-            if (new DateTime(ticks).AddSeconds(30) < DateTime.Now)
-            {
-                return ObjectExtends.ToHttpRspMsgError("无效请求");
-            }
-            var secretKey = GetSecretByKey(appKey);
-            //判断签名是否一致
             var dic = new SortedList<string, string>();
             dic.Add("token", token);
             dic.Add("ticks", ticks.ToString());
             dic.Add("appKey", appKey);
-            dic.Add("secretKey", secretKey);
-            var currentSign = SecurifyHelper.CreateSign(dic, appKey);
-            if (currentSign != sign)
+            var chkResult = SecretCheck.CheckSign(dic, sign);
+            if (!chkResult.Status)
             {
-                return ObjectExtends.ToHttpRspMsgError("非法请求");
+                return ObjectExtends.ToHttpRspMsgError(chkResult.Msg);
             }
 
+            var user = GetUserObj();
+            return user.ToHttpRspMsgSuccess();
+        }
+
+        public HttpResponseMessage GetUserByToken(string token, long ticks, string appKey, string sign)
+        {
             var user = GetUserObj();
             return user.ToHttpRspMsgSuccess();
         }
@@ -110,24 +109,11 @@ namespace Api.Web.Areas.Demo.Controllers
         {
             return new
             {
+                token = "3344",
                 name = "charles",
                 mobile = "152*****512",
                 address = "Hangzhou ,Zhejiang province"
             };
-        }
-
-        static string GetSecretByKey(string key)
-        {
-            var dic = new Dictionary<string, string>()
-            {
-                {"charles","3333" },
-                {"zhangfj","4444" }
-            };
-            if (dic.ContainsKey(key))
-            {
-                return dic[key];
-            }
-            return string.Empty;
         }
     }
 }

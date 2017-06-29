@@ -244,6 +244,19 @@ namespace Api.Common
             return defValue;
         }
 
+        public static string ObjToStr(object obj, string def = "")
+        {
+            if (obj == null)
+            {
+                return def;
+            }
+            if (string.IsNullOrWhiteSpace(obj?.ToString()))
+            {
+                return def;
+            }
+            return obj.ToString();
+        }
+
         /// <summary>
         /// 将对象转换为Int32类型
         /// </summary>
@@ -323,6 +336,18 @@ namespace Api.Common
                 return StrToFloat(expression.ToString(), defValue);
 
             return defValue;
+        }
+
+        public static long ObjToLong(object obj, int def = 0)
+        {
+            try
+            {
+                return Convert.ToInt64(obj);
+            }
+            catch
+            {
+                return def;
+            }
         }
 
         /// <summary>

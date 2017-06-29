@@ -147,6 +147,7 @@
     <Compile Include="Common\HistoryLotteryHelper.cs" />
     <Compile Include="Common\PageExceptionAttribute.cs" />
     <Compile Include="Common\RspHeaderHttpModule.cs" />
+    <Compile Include="Common\SecretCheck.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">

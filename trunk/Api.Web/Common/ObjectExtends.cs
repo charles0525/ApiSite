@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net;
 using Api.Common;
 using Api.Entity.Enum;
+using Api.Web.Models;
 
 namespace Api.Web.Common
 {
@@ -46,6 +47,11 @@ namespace Api.Web.Common
         {
             var jsonObj = ToJsonObject(status, msg);
             return ToHttpRspMsg(jsonObj, statusCode);
+        }
+
+        public static ResultModel ReturnResult(string msg, bool status = false)
+        {
+            return new ResultModel(msg, status);
         }
     }
 }

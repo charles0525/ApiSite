@@ -12,4 +12,16 @@ namespace Api.Web.Models
         public string errorMsg { get; set; }
         public List<T> value { get; set; }
     }
+
+    public class ResultModel
+    {
+        public ResultModel(string msg, bool status = false)
+        {
+            Status = status;
+            Msg = msg;
+        }
+
+        public bool Status { get; set; }
+        public string Msg { get; set; }
+    }
 }
