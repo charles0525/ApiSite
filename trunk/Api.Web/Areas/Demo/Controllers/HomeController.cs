@@ -111,7 +111,7 @@ namespace Api.Web.Areas.Demo.Controllers
             return new
             {
                 name = "charles",
-                mobile = "15268596512",
+                mobile = "152*****512",
                 address = "Hangzhou ,Zhejiang province"
             };
         }
