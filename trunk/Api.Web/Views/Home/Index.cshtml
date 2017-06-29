@@ -1,0 +1,24 @@
+﻿@model Api.Entity.DB.SiteInfoEntity
+@{
+    Layout = null;
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        站点名称：@Model.SiteName<br />
+        @Html.ActionLink("点击跳到服务器错误页面", "ErrorPageDemo")<br />
+        <a href="/news/01">访问/news/01页面</a><br />
+        <a href="/*11x5/kj">访问/*11x5/kj页面</a><br /><br /><br />
+        缓存的数据：@ViewBag.CacheData <br /><br />
+        @Html.ActionLink("彩种信息查询", "Query")
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+﻿
+@{
+    Layout = null;
+    string httpCode = Response.StatusCode.ToString();
+    if(httpCode== "200" && !string.IsNullOrEmpty(ViewBag.ErrorCode))
+    {
+        httpCode = ViewBag.ErrorCode;
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ErrorPage</title>
+</head>
+<body>
+    <div> 
+        报错咯，@httpCode
+    </div>
+</body>
+</html>

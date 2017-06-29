@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>彩种信息查询</title>
+</head>
+<body>
+    <div>
+        <label for="LotteryType">彩种名称：</label>@Html.TextBox("LotteryType", "Sd11x5")<br />
+        <label for="LotteryCode">彩票号码：</label>@Html.TextBox("LotteryCode", "01,02,03,04,05")<br />
+        <input id="btnQuery" type="button" value="查询" />
+        <div>
+            <table border="1">
+                <tr>
+                    <th>理论出现概率(%)</th>
+                    <th>历史开奖中奖次数</th>
+                    <th>历史最大遗漏(%)</th>
+                </tr>
+                <tr>
+                    <td class="td-probability">0</td>
+                    <td class="td-historyWinningCount">0</td>
+                    <td class="td-historyMaxFlawed">0</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+<script src="~/Content/js/jquery-3.0.0.min.js"></script>
+<script>
+    $(function () {
+        $("#btnQuery").on("click", query);
+    });
+    function query() {
+        try {
+            $("#btnQuery").off("click");
+            check();
+            var LotteryType = $("#LotteryType").val(),
+                LotteryCode = $("#LotteryCode").val();
+            $.get('/ajax/QueryInfo', { LotteryType: LotteryType, LotteryCode: LotteryCode }, function (data) {
+                if (data.result == 1&&!!data.value) {
+                    $(".td-probability").html(data.value.probability);
+                    $(".td-historyWinningCount").html(data.value.historyWinningCount );
+                    $(".td-historyMaxFlawed").html(data.value.historyMaxFlawed );
+                } else {
+                    alert(data.errorMsg);
+                }
+            });
+        } catch (msg) {
+            alert(msg);
+        } finally {
+            $("#btnQuery").on("click", query);
+        }
+    }
+
+    function check() {
+        if (!!$("#LotteryType").val() == false) {
+            throw "请输入彩种名称";
+        }
+        else if (!!$("#LotteryCode").val() == false) {
+            throw "请输入彩票编号";
+        }
+    }
+</script>
