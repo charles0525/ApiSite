@@ -21,9 +21,9 @@ namespace Api.Web
         {
             // 在应用程序启动时运行的代码
             AreaRegistration.RegisterAllAreas();
+            AutofacConfig.instance.Init();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-
             HistoryLotteryHelper.SetContentToCache();
             ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(OnRemoteCertificateValidationCallback);
         }
@@ -56,7 +56,6 @@ namespace Api.Web
         /// <returns></returns>
         private bool OnRemoteCertificateValidationCallback(Object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
-
             return true;
         }
     }

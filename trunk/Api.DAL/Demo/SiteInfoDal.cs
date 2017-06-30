@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Api.Entity.DB;
 using Api.DAL.Extend;
+using Api.Interface.Demo;
 
 namespace Api.DAL
 {
-    public class SiteInfoDal : BaseDal
+    public class SiteInfoDal : BaseDal, ISiteInfoDal
     {
         public SiteInfoEntity Get(int id)
         {
@@ -24,6 +25,11 @@ namespace Api.DAL
 
             var data = this.TestDb.GetOne<SiteInfoEntity>(strSql, new { id });
             return data;
+        }
+
+        public string GetName()
+        {
+            return "laicai site";
         }
     }
 }

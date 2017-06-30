@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Api.BLL;
 using Api.Common;
 using Api.Web.Common;
+using Api.Interface.Demo;
+using Autofac;
+using Api.Entity.DB;
 
 namespace Api.Web.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly SiteInfoBll _bll = new SiteInfoBll();
+        private readonly ISiteInfoDal _siteInfo = AutofacConfig.instance.Container.Resolve<ISiteInfoDal>();
 
         /// <summary>
         /// 测试页面
@@ -19,10 +21,10 @@ namespace Api.Web.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            //ViewBag.CacheData = CacheHelper.Get<string>(ConstValues.CacheKey_HistoryLottery);
-            //var siteInfo = _bll.Get();
-            //return View(siteInfo);
-            return View();
+            ViewBag.CacheData = CacheHelper.Get<string>(ConstValues.CacheKey_HistoryLottery);
+            var siteInfo = new SiteInfoEntity();// _siteInfo.Get(0);
+            var siteName = _siteInfo.GetName();
+            return View(siteInfo);
         }
 
         /// <summary>
