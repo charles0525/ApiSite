@@ -4,17 +4,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Api.Entity;
 
 namespace Api.Web.Common
 {
-    public class SecretCheck
+    public class SecretHelper
     {
         public static ResultModel CheckSign(SortedList<string, string> dic, string sign)
         {
-            long ticks = Utils.ObjToLong(dic["ticks"]);
+            if (dic == null)
+            {
+                new CustomException("字典不能为空");
+            }
+
+            long timestamp = Utils.ObjToLong(dic["timestamp"]);
             string appKey = Utils.ObjToStr(dic["appKey"]);
-            //判断是否过期,30s有效期
-            if (new DateTime(ticks).AddSeconds(30) < DateTime.Now)
+            //判断是否过期
+            if (new DateTime(timestamp).AddSeconds(ConstValues.ApiValidSeconds) < DateTime.Now)
             {
                 return ObjectExtends.ReturnResult("无效请求", false);
             }
@@ -40,6 +46,16 @@ namespace Api.Web.Common
             {
                 return dic[key];
             }
+            return string.Empty;
+        }
+
+        public static string GetSecretTokenByKey(string key)
+        {
+            //先更新
+            //AppId SecretToken ExpiredTime
+            //唯一标识    私钥(更新频率比较高) 有效时间（有效期比较短）
+            //再返回
+
             return string.Empty;
         }
     }

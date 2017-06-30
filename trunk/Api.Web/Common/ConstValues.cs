@@ -6,6 +6,9 @@ using System.Web;
 
 namespace Api.Web.Common
 {
+    /// <summary>
+    /// 常量值
+    /// </summary>
     public class ConstValues
     {
         /// <summary>
@@ -25,5 +28,10 @@ namespace Api.Web.Common
            new RouteItem() { PageTitle="页面/news/01", ControllerName="news", ActionName="01" ,Url="news/01"},
            new RouteItem() { PageTitle="页面/*11x5/kj", ControllerName="*11x5", ActionName="kj",Url="*11x5/kj" }
         };
+
+        /// <summary>
+        /// api接口有效秒数
+        /// </summary>
+        public static readonly int ApiValidSeconds = 60;
     }
 }
