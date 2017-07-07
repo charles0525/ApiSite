@@ -16,7 +16,6 @@ namespace Api.Web.Areas.Demo.Controllers
         /// 完全开放
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
         public HttpResponseMessage GetUser()
         {
             var user = GetUserObj();
@@ -28,7 +27,6 @@ namespace Api.Web.Areas.Demo.Controllers
         /// 通过签名匹配校验
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
         public HttpResponseMessage GetUserBySign(string mobile, string appKey, string sign)
         {
             var dic = new SortedList<string, string>();
@@ -52,7 +50,6 @@ namespace Api.Web.Areas.Demo.Controllers
         /// <param name="appKey"></param>
         /// <param name="sign"></param>
         /// <returns></returns>
-        [HttpGet]
         public HttpResponseMessage GetUserBytimestamp(string mobile, long timestamp, string appKey, string sign)
         {
             var dic = new SortedList<string, string>();

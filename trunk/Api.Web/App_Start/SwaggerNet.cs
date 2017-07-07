@@ -9,25 +9,25 @@ using Swagger.Net;
 
 //[assembly: WebActivator.PreApplicationStartMethod(typeof(Api.Web.App_Start.SwaggerNet), "PreStart")]
 //[assembly: WebActivator.PostApplicationStartMethod(typeof(Api.Web.App_Start.SwaggerNet), "PostStart")]
-namespace Api.Web.App_Start 
+namespace Api.Web.App_Start
 {
-    public static class SwaggerNet 
+    public static class SwaggerNet
     {
-        public static void PreStart() 
+        public static void PreStart()
         {
             RouteTable.Routes.MapHttpRoute(
                 name: "SwaggerApi",
-                routeTemplate: "api/docs/{controller}",
-                defaults: new { swagger = true }
-            );            
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { swagger = false, controller = "Home", action = "Index", id = RouteParameter.Optional }
+            );
         }
-        
-        public static void PostStart() 
+
+        public static void PostStart()
         {
             var config = GlobalConfiguration.Configuration;
 
             config.Filters.Add(new SwaggerActionFilter());
-            
+
             try
             {
                 config.Services.Replace(typeof(IDocumentationProvider),

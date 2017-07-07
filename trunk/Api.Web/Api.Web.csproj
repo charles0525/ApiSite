@@ -156,6 +156,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Demo\Views\web.config" />
     <Content Include="ConfigFiles\Sd11x5.txt" />
     <Content Include="Content\js\jquery-3.0.0.min.js" />
     <Content Include="Global.asax" />
@@ -180,9 +181,9 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\SwaggerNet.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="Areas\Demo\Controllers\HomeController.cs" />
     <Compile Include="Areas\Demo\DemoAreaRegistration.cs" />
-    <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="Common\BaseApiController.cs" />
     <Compile Include="Common\BaseController.cs" />
     <Compile Include="Common\ConstValues.cs" />
@@ -212,7 +213,6 @@
     <Content Include="Views\Home\ChildPage.cshtml" />
     <Content Include="Views\Home\Query.cshtml" />
     <Content Include="Nlog.config" />
-    <Content Include="Areas\Demo\Views\web.config" />
     <Content Include="SwaggerUI\lib\.DS_Store" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
